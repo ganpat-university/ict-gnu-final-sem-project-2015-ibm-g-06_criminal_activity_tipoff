@@ -30,7 +30,7 @@ def get_home_page(user):
 		elif str(user.groups.all()[0]) == 'member':
 			return 'home_page'
 	else:
-		return False
+		return "home_page"
 
 ################ returns home if logged in or login if not #################
 def allowed_users(allowed_roles=[]):

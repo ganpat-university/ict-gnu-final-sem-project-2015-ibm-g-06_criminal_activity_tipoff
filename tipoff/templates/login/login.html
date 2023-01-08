@@ -1,0 +1,12 @@
+<link rel="stylesheet" type="text/css" href="{{static('login/login.css')}}"/>
+
+<form method="POST">
+	{{ csrf_input }}
+	<input type="text" name="username">
+	<input type="password" name="password">
+	<button type="submit">Sign in</button>
+
+	{% if message %}
+		{{message}}
+	{% endif %}
+</form>
