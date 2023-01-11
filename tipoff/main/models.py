@@ -54,7 +54,7 @@ class person_report(models.Model):
 		super(person_report,self).save(*args,**kwargs)
 
 	def __str__(self):
-		return self.pk
+		return str(self.pk)
 
 class wanted_list(models.Model):
 	reported_by_name = models.CharField(max_length=100,null=True,blank=True)
@@ -71,7 +71,7 @@ class wanted_list(models.Model):
 	save_date_time = models.DateTimeField(auto_now_add=True)
 
 	def save(self,*args,**kwargs):
-		super(person_report,self).save(*args,**kwargs)
+		super(wanted_list,self).save(*args,**kwargs)
 
 	def __str__(self):
 		return self.name
