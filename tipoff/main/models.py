@@ -19,6 +19,10 @@ class activity_report(models.Model):
 	
 	save_date_time = models.DateTimeField(auto_now_add=True)
 
+	false_alarm = models.BooleanField(default=False)
+
+	invistigated = models.BooleanField(default=False)
+	
 	def save(self,*args,**kwargs):
 		super(activity_report,self).save(*args,**kwargs)
 
@@ -41,6 +45,10 @@ class person_report(models.Model):
 	video = models.FileField(upload_to="videos",blank=True)
 	
 	save_date_time = models.DateTimeField(auto_now_add=True)
+
+	false_alarm = models.BooleanField(default=False)
+
+	invistigated = models.BooleanField(default=False)
 
 	def save(self,*args,**kwargs):
 		super(person_report,self).save(*args,**kwargs)
