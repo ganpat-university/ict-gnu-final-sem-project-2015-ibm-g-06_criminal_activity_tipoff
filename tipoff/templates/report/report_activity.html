@@ -47,13 +47,17 @@
             </li>
         </ul>
         <!-- Step Wise Form Content -->
-        <form id="userAccountSetupForm" name="userAccountSetupForm" enctype="multipart/form-data" method="POST">
+        <form id="userAccountSetupForm" name="userAccountSetupForm" enctype="multipart/form-data" method="POST" action="{{url ('report_person')}}">
+            {{ csrf_input }}
             <!-- Step 1 Content -->
             <section id="step-1" class="form-step">
                 <h2 class="font-normal">Basic Details</h2>
                 <!-- Step 1 input fields -->
                 <div class="mt-3">
-                    Step 1 input fields goes here..
+                    Your Name: <input type="text" name="r_name" placeholder="not mandatory"><br><br><br>
+                    Your Email: <input type="email" name="r_email" placeholder="not mandatory"><br><br><br>
+                    Your Phone: <input type="tel" id="phone" name="r_phone" placeholder="9899-45-6789" pattern="[0-9]{4}-[0-9]{2}-[0-9]{4}"><br><br><br>
+                    Your address: <input type="text" name="r_address" placeholder="not mandatory"><br><br><br>
                 </div>
                 <div class="mt-3">
                     <button class="button btn-navigate-form-step" type="button" step_number="2">Next</button>
@@ -61,10 +65,33 @@
             </section>
             <!-- Step 2 Content, default hidden on page load. -->
             <section id="step-2" class="form-step d-none">
-                <h2 class="font-normal">Social Profiles</h2>
+                <h2 class="font-normal">About the crime</h2>
+                <h5>* means it is required feild Please provide information as required!!</h5>
                 <!-- Step 2 input fields -->
                 <div class="mt-3">
-                    Step 2 input fields goes here..
+                    <label for="crime" >Type of Crime:*</label>
+
+                    <select name="crime" id="crime" required>
+                      <option value="Drugs">Drugs Related crime</option>
+                      <option value="terrorist">Terrorist Activity</option>
+                      <option value="Mob_lynching">Mob Lynching</option>
+                      <option value="something">Something Else</option>
+                    </select> <br><br><br>
+                <label for="Description">Description Of The Crime:*</label><br>
+
+                <textarea id="Description" name="Description" rows="4" cols="50" maxlength="100" minlength="50" required>Describe the crime in your words not less than 50 charaters and not more than 200 charaters.
+                </textarea> <br><br>
+                Activity Location:* <input type="text" name="location" placeholder="Location" required><br><br><br>
+                <label for="A_date">Activity Date:*</label>
+                <input type="date" id="A_date" name="A_date" required> <br><br>
+                <label for="A_time">Activity Time:*</label>
+                <input type="time" id="A_time" name="A_time" required> <br><br><br>
+                <label for="img">Upload image(if any):</label>
+                <input type="file" id="img" name="img" accept="image/*"><br><br>
+                <label for="video">Upload Video(if any):</label>
+                <input type="file" id="video" name="video" accept="video/*"><br><br>
+
+
                 </div>
                 <div class="mt-3">
                     <button class="button btn-navigate-form-step" type="button" step_number="1">Prev</button>
@@ -73,10 +100,18 @@
             </section>
             <!-- Step 3 Content, default hidden on page load. -->
             <section id="step-3" class="form-step d-none">
-                <h2 class="font-normal">Personal Details</h2>
+                <h2 class="font-normal">Review and Submit</h2>
                 <!-- Step 3 input fields -->
                 <div class="mt-3">
-                    Step 3 input fields goes here..
+                    <div class="tacbox">
+                       <p>The information i have provided is correct to best of my knowledge and </p> I adhre to the law and consitution of India.<br><br><br>
+                        <input id="checkbox" type="checkbox" />
+                        <label for="checkbox"> I agree to the above <a href="#">Terms and Conditions</a>.</label>
+
+                        <br><br><br><br><h5 style="color:red;">**If you are not able to submit the form it means there are some required fields that you may have missed!!<br>
+                            Please check!
+                        </h5>
+                      </div>
                 </div>
                 <div class="mt-3">
                     <button class="button btn-navigate-form-step" type="button" step_number="2">Prev</button>
