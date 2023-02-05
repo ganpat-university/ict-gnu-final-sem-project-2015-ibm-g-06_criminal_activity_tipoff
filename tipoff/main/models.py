@@ -36,7 +36,7 @@ class person_report(models.Model):
 	reporter_address = models.CharField(max_length=100,null=True,blank=True)
 	
 	name = models.CharField(max_length=100,null=True,blank=True)
-	description = models.CharField(max_length=100)
+	description = models.CharField(max_length=10000)
 	location = models.CharField(max_length=100,null=True,blank=True)
 	date = models.DateField()
 	time = models.TimeField()

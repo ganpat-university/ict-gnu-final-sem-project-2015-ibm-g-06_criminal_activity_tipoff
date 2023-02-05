@@ -6,3 +6,9 @@ class activity_report_form(ModelForm):
 		model = activity_report
 		# fields = '__all__'
 		exclude = ['invistigated']
+
+class person_report_form(ModelForm):
+	class Meta:
+		model = person_report
+		# fields = '__all__'
+		exclude = ['invistigated',"false_alarm","save_date_time"]

@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
+from .forms import *
 # Create your views here.
 
 
@@ -18,6 +19,19 @@ def report(request):
 	return render(request,"report/report.html",{})
 	
 def report_person(request):
+	if request.method == 'POST':
+		# if person_report_id: # if edit
+		# 	form = person_report_form(request.POST, instance=edit) 
+		# else: # if create
+		form = person_report_form(request.POST)
+		if form.is_valid():
+			candidate = form.save(commit=False)
+			candidate.save()
+			print("saved :: ", candidate)
+			return redirect('home_page')
+		else:
+			context['errors'] = form.errors.as_ul()	
+
 	print("hello")
 	return render(request,"report/report_person.html",{})
 

@@ -4,10 +4,13 @@ from .views import *
 urlpatterns = [
 	# re_path('',include("login_V1.urls"),name="login"),
 	# re_path('',include("main.urls"),name="main"),
+
+	path('',home_page,name="home_page"),
 	path('home/',home_page,name="home_page"),
 	path('about_us/',about_us_function,name="about_us_name"),
 	path('something/',something,name="something"),
 	path('report/',report,name="report"),
+	# re_path(r'^report/person/(?P<person_report_id>\d+)/$',report_person,name = 'user_dash'),
 	path('report/person/',report_person,name="report_person"),
 	path('report/activity/',report_activity,name="report_activity"),
 	path('my-admin/home/',admin_home,name="admin_home"),
