@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import *
@@ -23,6 +24,7 @@ def report_person(request):
 		# if person_report_id: # if edit
 		# 	form = person_report_form(request.POST, instance=edit) 
 		# else: # if create
+		print ("here");
 		form = person_report_form(request.POST)
 		if form.is_valid():
 			candidate = form.save(commit=False)
@@ -30,13 +32,29 @@ def report_person(request):
 			print("saved :: ", candidate)
 			return redirect('home_page')
 		else:
+			print ("error",form.errors)
 			context['errors'] = form.errors.as_ul()	
 
-	print("hello")
 	return render(request,"report/report_person.html",{})
 
 def report_activity(request):
-	return render(request,"report/report_activity.html",{})
+		
+		if request.method == 'POST':
+
+		# if person_report_id: # if edit
+		# 	form = person_report_form(request.POST, instance=edit) 
+		# else: # if create
+			form = activity_report_form(request.POST)
+			if form.is_valid():
+				candidate = form.save(commit=False)
+				candidate.save()
+				print("saved :: ", candidate)
+				return redirect('home_page')
+			else:
+				context['errors'] = form.errors.as_ul()	
+
+		return render(request,"report/report_activity.html",{})
+
 
 def admin_home(request):
 	my_person_reports = person_report.objects.all().filter(
