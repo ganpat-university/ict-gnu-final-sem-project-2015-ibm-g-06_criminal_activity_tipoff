@@ -57,21 +57,22 @@ class person_report(models.Model):
 		return str(self.pk)
 
 class wanted_list(models.Model):
+	name = models.CharField(max_length=100)
+	
 	reported_by_name = models.CharField(max_length=100,null=True,blank=True)
 	reported_by_phone = models.CharField(max_length=100,null=True,blank=True)
 	reported_by_address = models.CharField(max_length=100,null=True,blank=True)
-	name = models.CharField(max_length=100,null=True,blank=True)
-	hair_description = models.CharField(max_length=100)
-	height_description = models.CharField(max_length=100)
-	cloth_description = models.CharField(max_length=100)
-	caught_crime = models.CharField(max_length=100)
+	hair_description = models.CharField(max_length=100,null=True,blank=True)
+	height_description = models.CharField(max_length=100,null=True,blank=True)
+	cloth_description = models.CharField(max_length=100,null=True,blank=True)
+	caught_crime = models.CharField(max_length=100,null=True,blank=True)
 	caught_location = models.CharField(max_length=100,null=True,blank=True)
-	caught_date = models.DateField()
-	caught_time = models.TimeField()
+	caught_date = models.DateField(null=True,blank=True)
+	caught_time = models.TimeField(null=True,blank=True)
 	save_date_time = models.DateTimeField(auto_now_add=True)
 
 	def save(self,*args,**kwargs):
 		super(wanted_list,self).save(*args,**kwargs)
 
 	def __str__(self):
-		return self.name
+		return f'{self.name}'
