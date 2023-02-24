@@ -70,3 +70,34 @@ def admin_home(request):
 	}
 	return render(request,"admin/home.html",context)
 
+def show_activity_report(request):
+	show_activity_report = activity_report.objects.all().filter(invistigated=False)
+	context = {
+		"result":show_activity_report
+		
+	}
+	return render(request,"admin/show_activity_report.html",context)
+def show_person_report(request):
+	show_person_report = person_report.objects.all().filter(invistigated=False)
+	context = {
+		"result":show_person_report
+		
+	}
+	return render(request,"admin/show_person_report.html",context)
+
+def show_wnatedlist(request):
+	show_wnatedlist = wanted_list.objects.all()
+	context = {
+		"result":show_wnatedlist
+		
+	}
+	return render(request,"admin/show_wantedlist.html",context)
+
+def show_investigated_report(request):
+	show_investigated_report = activity_report.objects.all().filter(invistigated=True)
+	print(show_investigated_report)
+	context = {
+		"result":show_investigated_report
+		
+	}
+	return render(request,"admin/investigated_report.html",context)

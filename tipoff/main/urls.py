@@ -15,4 +15,8 @@ urlpatterns = [
 	path('report/activity/',report_activity,name="report_activity"),
 	path('my-admin/home/',admin_home,name="admin_home"),
     # re_path('admin/', admin.site.urls ,name="my_admin"),
-]
+	path('report/activity/show/',show_activity_report,name="show_activity_report"),
+    path('report/person/show/',show_person_report,name="show_person_report"),
+    path('report/wantedlist/show',show_wnatedlist,name="show_wnatedlist"),
+    path('report/investigated/show/',show_investigated_report,name="show_investigated_report"),
+    ]

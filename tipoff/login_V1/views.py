@@ -36,7 +36,7 @@ def login_page(request):
 				print(user, " -- Logged in")
 				print("---------------------------------------")
 				login(request, user)
-				return redirect(page)
+				return redirect("admin_home")
 			else:
 				message = "Something is wrong with your account.."
 				context['message'] = message
