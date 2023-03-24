@@ -22,7 +22,6 @@ def login_page(request):
 	context = {
 	}
 	if request.method == 'POST':
-		print("herererererer")
 		# email = request.POST.get('email_id')
 		username = request.POST.get('username')
 		password = request.POST.get('password')

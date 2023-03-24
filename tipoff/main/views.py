@@ -2,9 +2,10 @@ from multiprocessing import context
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import *
+from login_V1.decorators import block_ips
 # Create your views here.
 
-
+@block_ips
 def home_page(request):
 	return render(request,"home/homepage.html",{})
 

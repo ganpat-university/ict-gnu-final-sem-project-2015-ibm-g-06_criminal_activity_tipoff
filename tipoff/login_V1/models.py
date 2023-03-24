@@ -1,5 +1,15 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+import ipaddress
+
+class IPBlock(models.Model):
+	ip_address = models.GenericIPAddressField(null=True,blank=True)
+	ip_range = models.CharField(max_length=100,null=True,blank=True)
+	def save(self, *args, **kwargs):
+		if self.ip_range:
+			# Normalize the CIDR notation to ensure it is valid
+			cidr_ip = ipaddress.ip_network(self.ip_range, strict=False)
+			self.ip_range = str(cidr_ip)
+		super(IPBlock, self).save(*args, **kwargs)
 # from django.utils.translation import ugettext_lazy as _
 
 
