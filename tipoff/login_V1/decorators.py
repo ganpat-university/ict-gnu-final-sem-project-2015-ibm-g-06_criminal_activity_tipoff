@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 
+from .models import IPBlock
 ################ returns home if logged in or login if not #################
 
 def unauthenticated_user(next_fun):
@@ -52,3 +53,35 @@ def allowed_users(allowed_roles=[]):
                 # return HttpResponse("hii")
         return wrapper_func
     return decorator
+
+################ returns True or False if the IP address is Blocked #################
+import ipaddress
+
+def is_ip_blocked(ip_address):
+    blocked_ips = IPBlock.objects.filter(ip_address=ip_address)
+    blocked_ranges = IPBlock.objects.filter(ip_range__isnull=False)
+
+    for ip_block in blocked_ips:
+        if ip_block.ip_address == ip_address:
+            return True
+
+    for ip_block in blocked_ranges:
+        cidr_ip = ipaddress.IPv4Network(ip_block.ip_range)
+        if ipaddress.IPv4Address(ip_address) in cidr_ip:
+            return True
+    return False
+
+def block_ips(view_func):
+    def wrapped_view(request, *args, **kwargs):
+        ip_address = request.META.get('REMOTE_ADDR')
+        print("IP Address :: ",ip_address)
+        if is_ip_blocked(ip_address):
+            return render(request, 'blocked.html')
+        # blocked_ips = IPBlock.objects.filter(ip_address=ip_address)
+        # blocked_ranges = IPBlock.objects.filter(ip_range__contains=ip_address)
+
+        # if blocked_ips or blocked_ranges:
+        #     return render(request, 'blocked.html')
+
+        return view_func(request, *args, **kwargs)
+    return wrapped_view
